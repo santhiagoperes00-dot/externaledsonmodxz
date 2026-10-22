@@ -1,0 +1,32 @@
+[
+  {
+    "elapsed_ms": 531.0,
+    "entities": 14,
+    "local": "0x79ef1000",
+    "on_screen": 13
+  },
+  {
+    "elapsed_ms": 157.0,
+    "entities": 14,
+    "local": "0x79ef1000",
+    "on_screen": 13
+  },
+  {
+    "elapsed_ms": 172.0,
+    "entities": 14,
+    "local": "0x79ef1000",
+    "on_screen": 13
+  },
+  {
+    "elapsed_ms": 203.0,
+    "entities": 14,
+    "local": "0x79ef1000",
+    "on_screen": 13
+  },
+  {
+    "elapsed_ms": 172.0,
+    "entities": 15,
+    "local": "0x79ef1000",
+    "on_screen": 14
+  }
+]

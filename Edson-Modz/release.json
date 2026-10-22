@@ -1,0 +1,13 @@
+{
+  "version": "0.2-experimental",
+  "exe": "Edson Modz.exe",
+  "bytes": 11812947,
+  "sha256": "7050ee78cd0558f8bfa9b76d9d85b308a9bccb41f028d7771d8924f00f7276b7",
+  "windows": "x64",
+  "uac": "requireAdministrator",
+  "verified_library_sha256": "11fbddd1d4c65646522fe092b391ed416b0830a16017e89b2c6e190f9df83651",
+  "automatic_connection_test": "passed",
+  "shutdown_exit_code": 0,
+  "overlay_alignment": "not visually confirmed",
+  "aim_accuracy": "not validated"
+}

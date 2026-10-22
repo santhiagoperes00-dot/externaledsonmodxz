@@ -1,0 +1,74 @@
+EDSON MODZ 0.2 — versão experimental para o ambiente testado
+
+ALVO
+Free Fire 1.132.1, ARM32 (armeabi-v7a), BlueStacks Nougat32 com suporte x86
+e su root. A biblioteca instalada precisa ter SHA-256
+11fbddd1d4c65646522fe092b391ed416b0830a16017e89b2c6e190f9df83651.
+O programa verifica esse hash antes de iniciar a leitura.
+
+USO
+1. Abra o Free Fire e entre no treinamento.
+2. Abra Edson Modz.exe e confirme o pedido de administrador do Windows.
+3. O painel tenta detectar o BlueStacks e conectar automaticamente. Se não
+   encontrar a instalação, escolha HD-Adb.exe e informe a porta da instância.
+   DETECTAR NOVAMENTE repete a busca. A aba STATUS mostra o resultado.
+4. ESP e mira começam desligados. Ative e configure as opções desejadas.
+5. Volte à janela do BlueStacks. O overlay aparece somente com o jogo em foco.
+6. Para experimentar a mira, abra MIRA e marque a opção de ativação.
+   Segure o botão direito dentro do jogo. O movimento depende do modo de
+   captura de mouse e do mapeamento de controles do BlueStacks.
+7. F8 desativa ESP e mira. Desconectar encerra a sessão de leitura.
+
+LIMITES DESTA ENTREGA
+- Leitura real e posições foram testadas durante o treinamento.
+- Foram observadas 14–16 entidades. Com leituras agrupadas, amostras quentes
+  demoraram 157–203 ms; uma primeira amostra demorou 531 ms. Não são 60 FPS.
+- O menu abriu e conectou durante o teste.
+- O executável final passou no teste de administrador, detecção automática,
+  conexão e encerramento com código 0. Essa execução leu 14 entidades, com
+  484 ms na última amostra. Cinco testes de geometria e configuração passaram.
+- A sobreposição não teve seu alinhamento visual confirmado: o teste não
+  conseguiu colocar a janela do jogo em primeiro plano.
+- A mira por movimento de mouse está implementada, mas sua precisão em jogo
+  NÃO foi validada. Ela começa desligada; não dispara automaticamente.
+- O filtro de visibilidade usa o campo fornecido no JSON, ainda não validado.
+  Se permanecer falso, a opção 'Exigir flag de visibilidade' impede a mira.
+  Desmarcá-la elimina esse filtro; não existe teste de oclusão por paredes.
+- O campo DictionaryEntities=0x68 estava vazio no treinamento. A coleção
+  preenchida foi encontrada e lida em match+0xC8, com entradas de 40 bytes.
+- O painel tenta restabelecer a leitura após interrupções ou troca de partida.
+  Ao trocar de instância, desconecte e use DETECTAR NOVAMENTE.
+- Nenhum endereço absoluto de uma sessão anterior é reutilizado.
+
+FUNCIONAMENTO
+O executável envia um pequeno leitor temporário ao Android e o inicia por su.
+O leitor abre /proc/PID/mem somente para leitura. A conexão usa socket de nome
+aleatório e token por sessão, encaminhado pelo ADB. O binário temporário é
+removido após conectar; o leitor encerra quando a sessão fecha ou fica inativa.
+O programa Windows desenha a sobreposição e usa SendInput para mover o mouse
+somente com a mira habilitada, botão direito pressionado, jogo em foco e uma
+amostra recente. Não altera a memória do jogo.
+
+LOG
+%LOCALAPPDATA%\EdsonModz\session.log
+
+FONTE E COMPILAÇÃO
+Codigo-fonte.zip contém app.py, reader.py, discovery.py, bridge.c, testes,
+o arquivo .spec e o leitor compilado.
+Leitor: Zig 0.13.0, zig cc -target x86-linux-musl -static -O2 -s bridge.c -o edson-reader
+Aplicativo: Python 3.12, Tkinter, PyInstaller 6.22.3.
+Empacotar com PyInstaller usando "Edson Modz.spec". O manifesto solicita
+requireAdministrator; não há tentativa de aceitar ou evitar o UAC automaticamente.
+O aplicativo usa o ADB instalado com o BlueStacks; não inclui outro servidor ADB.
+
+DISTRIBUIÇÃO E COMPATIBILIDADE
+Use o ZIP Edson-Modz-0.2.zip, que acompanha instruções e licenças.
+Requisitos: Windows 64 bits, BlueStacks com suporte x86 e ARM32, ADB ativado,
+su root e a biblioteca exata indicada acima. Administrador no Windows NÃO
+substitui root no Android. Não precisa instalar Python no computador de destino.
+A detecção consulta caminhos usuais, registro e configurações do BlueStacks.
+Portas e caminhos diferentes podem ser informados manualmente.
+Se houver várias instâncias, escolha a porta correta; janelas duplicadas com
+o mesmo nome não recebem overlay para evitar desenhar na instância errada.
+Não foram feitos testes em outro PC ou em todos os modos de partida.
+Não há garantia de compatibilidade com outra atualização do jogo.
